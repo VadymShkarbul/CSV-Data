@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+
+  {% if form.errors %}
+    <p style="color: brown"
+       align="center"><br>Your username and password didn't match. Please try again.</p>
+  {% endif %}
+  {% if next %}
+    <p style="color: brown"
+       align="center"><br>Please login to see this page.</p>
+  {% endif %}
+  <form method="POST"
+        class="col-lg-4 offset-lg-4">
+    {% csrf_token %}<br>
+    <input type="input"
+           class="form-control"
+           name="username"
+           id="inputEmail"
+           placeholder="Username"
+           required><br>
+    <input type="password"
+           class="form-control"
+           name="password"
+           id="inputPass"
+           placeholder="Password"
+           required><br>
+    <button type="submit"
+            value="Login"
+            class="btn btn-primary btn-block mb-4">Sign in
+    </button>
+    <input type="hidden"
+           name="next"
+           value="{{ next }}"/>
+  </form>
+
+{% endblock %}

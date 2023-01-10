@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+  <p><h2>Schemas  list:
+  <a href="{% url 'schema_create' %}"
+     class="btn btn-outline-secondary float-right">New schema</a>
+</h2></p>
+  <form action=""
+        method="get"
+        class="form-inline">
+  </form>
+  <br>
+  {% if schema_list %}
+    <table class="table">
+      <tr>
+         <th>#</th>
+        <th>Title</th>
+        <th>Modified</th>
+        <th>Actions</th>
+      </tr>
+
+      {% for schema in schema_list %}
+        <tr>
+          <td>
+            {{ schema.id }}
+          </td>
+          <td>
+            {{ schema.title }}
+          </td>
+          <td>
+            {{ schema.modified }}
+          </td>
+          <td>
+            <a class="btn btn-sm btn-outline-info"
+               href="{% url 'schema_update' pk=schema.id %}">
+              Update
+            </a>
+          </td>
+          <td>
+            <a class="btn btn-sm btn btn-outline-danger"
+               href="{% url 'schema_delete' pk=schema.id %}">
+              Delete
+            </a>
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+
+  {% else %}
+    <p>There are no schemas</p>
+  {% endif %}
+{% endblock %}
